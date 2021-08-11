@@ -92,15 +92,15 @@ def get_planner_params(env_spec):
             action_magnitude=cost_action_magnitude,
             action_smooth=cost_action_smooth,
         ) # [batch, horizon]
-
+    # TODO
     return d(
         cls=MPPIplanner,
         kwargs=d(
             env_spec=env_spec,
             action_selection_limits=d(
                 commands=d(
-                    angular_velocity=(-1., 1.),
-                    linear_velocity=(0.8, 0.8),
+                    angular_velocity=(-1., 1.), # ang vel limits
+                    linear_velocity=(0.8, 0.8), # lin vel limits
                 )
             ),
             cost_fn=cost_fn,
