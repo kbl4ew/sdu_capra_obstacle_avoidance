@@ -1,0 +1,13 @@
+diff --git a/scripts/train.py b/scripts/train.py
+index 7cc4c5a..7c071eb 100644
+--- a/scripts/train.py
++++ b/scripts/train.py
+@@ -1,6 +1,7 @@
+ import argparse
+ import os
+-
++import sys
++sys.path.insert(1,'/home/olaya/dev/badgr2/src')
+ from badgr.file_manager import FileManager
+ from badgr.trainers.trainer import Trainer
+ from badgr.utils import tf_utils

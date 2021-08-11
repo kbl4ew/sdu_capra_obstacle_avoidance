@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/olaya/dev/badgr2/data/collision_position/ckpts/ckpt-20"
+all_model_checkpoint_paths: "/home/olaya/dev/badgr2/data/collision_position/ckpts/ckpt-20"

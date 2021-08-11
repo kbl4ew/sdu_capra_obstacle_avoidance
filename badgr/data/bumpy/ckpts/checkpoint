@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/olaya/dev/badgr2/data/bumpy/ckpts/ckpt-10"
+all_model_checkpoint_paths: "/home/olaya/dev/badgr2/data/bumpy/ckpts/ckpt-10"
