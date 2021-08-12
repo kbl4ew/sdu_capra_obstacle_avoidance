@@ -8,14 +8,27 @@ import rospy
 from geometry_msgs.msg import Twist, TwistStamped, Vector3Stamped
 from nav_msgs.msg import Odometry
 
+linear_vel_cmd = 0.0
+angular_vel_cmd = 0.0
+
+class interface():
+     def __init__(self, rosClient, mqttClient):
+        self.rosClient = rosClient
+        self.mqttClient = mqttClient
+
 class ros_capra_interface():
 
     def __init__(self):
         self.command_sub = rospy.Subscriber('/command/velocity', Twist, self.command_callback)
         self.odom_pub = rospy.Publisher('odometry', Odometry, queue_size = 5)
 
+
     def command_callback(self, msg):
-        command_velocity_mqtt(self, msg.linear.x, msg.angular.z)
+        global linear_vel_cmd 
+        linear_vel_cmd = msg.linear.x
+        global angular_vel_cmd 
+        angular_vel_cmd = msg.angular.z
+#        command_velocity_mqtt(self, msg.linear.x, msg.angular.z)
 
 
 def on_connect(client, userdata, flags, rc):
@@ -46,7 +59,8 @@ def parse_odometry(odom_mqtt):
       
 def command_velocity_mqtt(client, linear_velocity, angular_velocity):
     payload = {"header":{"frame_id":"hello_id"},"twist":{"linear":{"x":linear_velocity,"y":0.0,"z":0.0},"angular":{"x":0.0,"y":0.0,"z":angular_velocity}}}
-    client.publish("capra/direct_velocity", payload)
+#    print(payload)
+    client.publish("capra/direct_velocity", json.dumps(payload))
 
 
 
@@ -65,6 +79,7 @@ def run_interface():
     rate = rospy.Rate(100)
 
     while not rospy.is_shutdown():
+        command_velocity_mqtt(client, linear_vel_cmd, angular_vel_cmd)
         client.loop()
         rate.sleep()
 

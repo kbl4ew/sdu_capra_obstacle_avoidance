@@ -24,11 +24,11 @@ class roomba():
 
 
 	if min_dist < 400:
-            twistmsg.angular.z = 1
+            twistmsg.angular.z = 0.1
             twistmsg.linear.x = 0
         else:
             twistmsg.angular.z = 0
-            twistmsg.linear.x = 1
+            twistmsg.linear.x = 0.1
 
         self.vel_pub.publish(twistmsg)
         
