@@ -31,8 +31,5 @@
     <node pkg="pikachu" type="run_pikachu.py" name="run_pikachu" output="screen" >
     </node>
 
-<!-- rviz Node -->
-    <node pkg="rviz" type="rviz" name="rviz" output="screen" >
-    </node>
 
 </launch>

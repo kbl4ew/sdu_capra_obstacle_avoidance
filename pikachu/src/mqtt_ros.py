@@ -76,7 +76,7 @@ def initialize_connection():
 
 def run_interface():
     client = initialize_connection()
-    rate = rospy.Rate(100)
+    rate = rospy.Rate(10)
 
     while not rospy.is_shutdown():
         command_velocity_mqtt(client, linear_vel_cmd, angular_vel_cmd)

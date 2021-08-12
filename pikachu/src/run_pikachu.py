@@ -4,6 +4,8 @@
 import rospy
 from cv_bridge import CvBridge
 import numpy as np
+import cv2 
+
 
 from geometry_msgs.msg import Twist, TwistStamped, Vector3Stamped
 from nav_msgs.msg import Odometry
@@ -17,18 +19,21 @@ class roomba():
     def depthimg_callback(self,msg):
         bridge = CvBridge()
         cv_image = bridge.imgmsg_to_cv2(msg, desired_encoding = 'passthrough')
+        cv_image = cv_image[:240]
+        
         cv_image=cv_image[cv_image!=0]
-        min_dist = np.min(cv_image)
+        min_dist = np.min(cv_image.flatten())
+        print(np.min(cv_image.flatten()))
 
         twistmsg = Twist()
 
 
-	if min_dist < 400:
-            twistmsg.angular.z = 0.1
-            twistmsg.linear.x = 0
+	if min_dist < 600:
+            twistmsg.angular.z = 0.5
+            twistmsg.linear.x = 0.075
         else:
-            twistmsg.angular.z = 0
-            twistmsg.linear.x = 0.1
+            twistmsg.angular.z = 0.
+            twistmsg.linear.x = 0.15
 
         self.vel_pub.publish(twistmsg)
         
