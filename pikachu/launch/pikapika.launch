@@ -2,7 +2,12 @@
 
     <!--- Launch realsense -->
     <include file="$(find realsense2_camera)/launch/rs_camera.launch">
-  <arg name="filters" value="pointcloud"/>
+<arg name="initial_reset"           default="true"/>
+<arg name="enable_sync"           default="true"/>
+  <arg name="filters" default="pointcloud"/>
+  <arg name="depth_fps"           default="6"/>
+  <arg name="infra_fps"           default="6"/>
+  <arg name="color_fps"           default="6"/>
     </include>
 
 

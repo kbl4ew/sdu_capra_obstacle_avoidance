@@ -11,7 +11,7 @@ from nav_msgs.msg import Odometry
 class ros_capra_interface():
 
     def __init__(self):
-        self.command_sub = rospy.Subscriber('command/velocity', Twist, self.command_callback)
+        self.command_sub = rospy.Subscriber('/command/velocity', Twist, self.command_callback)
         self.odom_pub = rospy.Publisher('odometry', Odometry, queue_size = 5)
 
     def command_callback(self, msg):
