@@ -1,0 +1,29 @@
+<launch>
+
+    <!--- Launch realsense -->
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch">
+  <arg name="filters" value="pointcloud"/>
+    </include>
+
+
+    <!--- Depth image to laser scan -->
+    <node pkg="depthimage_to_laserscan"   type="depthimage_to_laserscan" name="depthimage_to_laserscan" >
+        <param name="scan_height" value="3"/> 
+        <param name="output_frame_id" value="base_link"/>
+        <remap from="image" to="camera/depth/image_rect_color" />
+    </node>
+
+    <!-- Maping Node -->
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping_node" output="screen" >
+        <remap from="odom" to="your/odom/topic" />
+    </node>
+
+<!-- mqtt Node -->
+    <node pkg="pikachu" type="mqtt_ros.py" name="mqtt_ros" output="screen" >
+    </node>
+
+<!-- rviz Node -->
+    <node pkg="rviz" type="rviz" name="rviz" output="screen" >
+    </node>
+
+</launch>
