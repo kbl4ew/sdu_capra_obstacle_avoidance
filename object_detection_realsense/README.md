@@ -25,4 +25,5 @@ Then the detections should look like this:
 ![](bottle.png?raw=true)
 ![](cup.png?raw=true)
 ![](keyboard.png?raw=true)
+![](banana.png?raw=true)
 
